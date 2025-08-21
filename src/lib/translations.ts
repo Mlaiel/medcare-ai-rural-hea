@@ -76,6 +76,37 @@ export interface Translations {
   textInput: string
   speakText: string
   
+  // Prescription Aid
+  prescriptionAid: string
+  prescriptionAidDesc: string
+  requestMedicine: string
+  medicineNotAvailable: string
+  uploadPrescription: string
+  prescriptionDetails: string
+  medicineName: string
+  dosage: string
+  countryCity: string
+  urgencyLevel: string
+  doctorNote: string
+  submitRequest: string
+  viewRequests: string
+  helpSomeone: string
+  pledgeHelp: string
+  markFulfilled: string
+  urgencyOptions: {
+    low: string
+    medium: string
+    high: string
+    critical: string
+  }
+  
+  // License and Policy
+  nonCommercialNotice: string
+  commercialLicensing: string
+  licensingContact: string
+  ipFingerprint: string
+  usageTracked: string
+  
   // Footer
   createdBy: string
   attributionNotice: string
@@ -141,6 +172,37 @@ export const translations: Record<string, Translations> = {
     textInput: "Text Input",
     speakText: "Speak Text",
     
+    // Prescription Aid
+    prescriptionAid: "Prescription Aid",
+    prescriptionAidDesc: "Get help obtaining medicines that aren't available locally",
+    requestMedicine: "Request Medicine",
+    medicineNotAvailable: "Medicine Not Available",
+    uploadPrescription: "Upload Prescription",
+    prescriptionDetails: "Prescription Details",
+    medicineName: "Medicine Name",
+    dosage: "Dosage",
+    countryCity: "Country/City",
+    urgencyLevel: "Urgency Level",
+    doctorNote: "Doctor's Note (Optional)",
+    submitRequest: "Submit Request",
+    viewRequests: "View Requests",
+    helpSomeone: "Help Someone",
+    pledgeHelp: "Pledge Help",
+    markFulfilled: "Mark as Fulfilled",
+    urgencyOptions: {
+      low: "Low - Can wait weeks",
+      medium: "Medium - Needed within days",
+      high: "High - Needed urgently",
+      critical: "Critical - Life-threatening"
+    },
+    
+    // License and Policy
+    nonCommercialNotice: "Non-commercial use only. For commercial licensing contact: mlaiel@live.de",
+    commercialLicensing: "Commercial Licensing",
+    licensingContact: "For commercial use, contact Fahed Mlaiel at mlaiel@live.de",
+    ipFingerprint: "Usage tracking active for attribution compliance",
+    usageTracked: "Platform usage is tracked and reported to the owner",
+    
     createdBy: "Created with humanitarian purpose by",
     attributionNotice: "MedCare-AI is free and open-source software designed to support underserved communities. Attribution to Fahed Mlaiel (mlaiel@live.de) is mandatory in all copies, forks, and derivatives.",
     alwaysFree: "Always Free",
@@ -204,6 +266,37 @@ export const translations: Record<string, Translations> = {
     textInput: "Entrada de Texto",
     speakText: "Hablar Texto",
     
+    // Prescription Aid
+    prescriptionAid: "Ayuda con Recetas",
+    prescriptionAidDesc: "Obtén ayuda para conseguir medicinas que no están disponibles localmente",
+    requestMedicine: "Solicitar Medicina",
+    medicineNotAvailable: "Medicina No Disponible",
+    uploadPrescription: "Subir Receta",
+    prescriptionDetails: "Detalles de la Receta",
+    medicineName: "Nombre del Medicamento",
+    dosage: "Dosis",
+    countryCity: "País/Ciudad",
+    urgencyLevel: "Nivel de Urgencia",
+    doctorNote: "Nota del Doctor (Opcional)",
+    submitRequest: "Enviar Solicitud",
+    viewRequests: "Ver Solicitudes",
+    helpSomeone: "Ayudar a Alguien",
+    pledgeHelp: "Comprometerse a Ayudar",
+    markFulfilled: "Marcar como Cumplido",
+    urgencyOptions: {
+      low: "Baja - Puede esperar semanas",
+      medium: "Media - Necesario en días",
+      high: "Alta - Necesario urgentemente",
+      critical: "Crítico - Amenaza la vida"
+    },
+    
+    // License and Policy
+    nonCommercialNotice: "Solo uso no comercial. Para licenciamiento comercial contactar: mlaiel@live.de",
+    commercialLicensing: "Licenciamiento Comercial",
+    licensingContact: "Para uso comercial, contactar a Fahed Mlaiel en mlaiel@live.de",
+    ipFingerprint: "Seguimiento de uso activo para cumplimiento de atribución",
+    usageTracked: "El uso de la plataforma es rastreado y reportado al propietario",
+    
     createdBy: "Creado con propósito humanitario por",
     attributionNotice: "MedCare-AI es software gratuito y de código abierto diseñado para apoyar comunidades desatendidas. La atribución a Fahed Mlaiel (mlaiel@live.de) es obligatoria en todas las copias, bifurcaciones y derivados.",
     alwaysFree: "Siempre Gratis",
@@ -266,6 +359,37 @@ export const translations: Record<string, Translations> = {
     voiceInput: "Saisie Vocale",
     textInput: "Saisie Texte",
     speakText: "Parler le Texte",
+    
+    // Prescription Aid
+    prescriptionAid: "Aide aux Ordonnances",
+    prescriptionAidDesc: "Obtenez de l'aide pour obtenir des médicaments non disponibles localement",
+    requestMedicine: "Demander un Médicament",
+    medicineNotAvailable: "Médicament Non Disponible",
+    uploadPrescription: "Télécharger Ordonnance",
+    prescriptionDetails: "Détails de l'Ordonnance",
+    medicineName: "Nom du Médicament",
+    dosage: "Dosage",
+    countryCity: "Pays/Ville",
+    urgencyLevel: "Niveau d'Urgence",
+    doctorNote: "Note du Médecin (Optionnel)",
+    submitRequest: "Soumettre la Demande",
+    viewRequests: "Voir les Demandes",
+    helpSomeone: "Aider Quelqu'un",
+    pledgeHelp: "S'engager à Aider",
+    markFulfilled: "Marquer comme Accompli",
+    urgencyOptions: {
+      low: "Faible - Peut attendre des semaines",
+      medium: "Moyen - Nécessaire en quelques jours",
+      high: "Élevé - Nécessaire de toute urgence",
+      critical: "Critique - Danger de mort"
+    },
+    
+    // License and Policy
+    nonCommercialNotice: "Usage non commercial uniquement. Pour licence commerciale contacter: mlaiel@live.de",
+    commercialLicensing: "Licence Commerciale",
+    licensingContact: "Pour usage commercial, contacter Fahed Mlaiel à mlaiel@live.de",
+    ipFingerprint: "Suivi d'usage actif pour conformité d'attribution",
+    usageTracked: "L'usage de la plateforme est suivi et rapporté au propriétaire",
     
     createdBy: "Créé avec un but humanitaire par",
     attributionNotice: "MedCare-AI est un logiciel gratuit et open-source conçu pour soutenir les communautés mal desservies. L'attribution à Fahed Mlaiel (mlaiel@live.de) est obligatoire dans toutes les copies, forks et dérivés.",
