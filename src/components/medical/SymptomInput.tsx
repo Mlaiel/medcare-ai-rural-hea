@@ -17,6 +17,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Progress } from '@/components/ui/progress'
 import { Microphone, Send, Loader2, CheckCircle, AlertTriangle } from '@phosphor-icons/react'
 import { toast } from 'sonner'
+import { useLanguage } from '@/hooks/useLanguage'
 
 interface Diagnosis {
   id: string
@@ -34,6 +35,7 @@ export default function SymptomInput() {
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [currentDiagnosis, setCurrentDiagnosis] = useState<Diagnosis | null>(null)
   const [diagnoses, setDiagnoses] = useKV<Diagnosis[]>('medical-diagnoses', [])
+  const { t, currentLanguage } = useLanguage()
 
   const handleSymptomAnalysis = async () => {
     if (!symptoms.trim()) {
@@ -47,17 +49,20 @@ export default function SymptomInput() {
       const prompt = spark.llmPrompt`
         You are a medical AI assistant providing preliminary diagnostic guidance for underserved rural communities. 
         Analyze these symptoms and provide a helpful, cautious assessment.
+        
+        IMPORTANT: Respond in ${currentLanguage} language, using culturally appropriate and simple language suitable for rural communities.
 
         Patient symptoms: ${symptoms}
 
         Provide a JSON response with:
-        - analysis: Brief explanation of possible conditions (2-3 sentences)
+        - analysis: Brief explanation of possible conditions (2-3 sentences) in ${currentLanguage}
         - confidence: Number 1-100 representing diagnostic confidence
-        - recommendations: Array of 3-4 practical next steps
+        - recommendations: Array of 3-4 practical next steps in ${currentLanguage}
         - severity: "low", "moderate", "high", or "urgent"
-        - disclaimer: Reminder that this is preliminary guidance only
+        - disclaimer: Reminder that this is preliminary guidance only in ${currentLanguage}
 
         Be empathetic, avoid medical jargon, and emphasize when immediate medical care is needed.
+        Consider cultural context and local healthcare availability in your recommendations.
       `
 
       const response = await spark.llm(prompt, 'gpt-4o', true)
@@ -77,7 +82,7 @@ export default function SymptomInput() {
       setCurrentDiagnosis(newDiagnosis)
       setDiagnoses(currentDiagnoses => [newDiagnosis, ...currentDiagnoses])
       
-      toast.success('Analysis complete! Review your preliminary assessment below.')
+      toast.success(t.success + '! Review your preliminary assessment below.')
       
     } catch (error) {
       toast.error('Unable to analyze symptoms. Please try again.')
@@ -110,19 +115,18 @@ export default function SymptomInput() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Microphone className="h-5 w-5 text-primary" />
-            Describe Your Symptoms
+            {t.howAreYouFeeling}
           </CardTitle>
           <CardDescription>
-            Tell us how you're feeling in your own words. Be as detailed as possible about your symptoms, 
-            when they started, and how they affect you.
+            {t.describeYourSymptoms}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="symptoms">Symptoms Description</Label>
+            <Label htmlFor="symptoms">{t.symptoms}</Label>
             <Textarea
               id="symptoms"
-              placeholder="For example: I have been having headaches for 3 days, feel tired, and have a fever..."
+              placeholder={t.symptomPlaceholder}
               className="min-h-32 resize-y"
               value={symptoms}
               onChange={(e) => setSymptoms(e.target.value)}
@@ -139,19 +143,19 @@ export default function SymptomInput() {
               {isAnalyzing ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Analyzing Symptoms...
+                  {t.analyzing}
                 </>
               ) : (
                 <>
                   <Send className="h-4 w-4 mr-2" />
-                  Get AI Analysis
+                  {t.analyzeSymptoms}
                 </>
               )}
             </Button>
             
             <Button variant="outline" disabled>
               <Microphone className="h-4 w-4 mr-2" />
-              Voice Input
+              {t.useVoiceInput}
               <Badge variant="secondary" className="ml-2 text-xs">Soon</Badge>
             </Button>
           </div>
@@ -159,8 +163,8 @@ export default function SymptomInput() {
           {isAnalyzing && (
             <div className="space-y-2">
               <div className="flex items-center justify-between text-sm">
-                <span>Analyzing symptoms...</span>
-                <span>Please wait</span>
+                <span>{t.analyzing}</span>
+                <span>{t.loading}</span>
               </div>
               <Progress value={66} className="h-2" />
             </div>
@@ -197,7 +201,7 @@ export default function SymptomInput() {
               <Alert className="border-destructive bg-destructive/5">
                 <AlertTriangle className="h-4 w-4 text-destructive" />
                 <AlertDescription className="font-medium text-destructive">
-                  <strong>Urgent:</strong> Your symptoms may require immediate medical attention. 
+                  <strong>{t.emergency}:</strong> Your symptoms may require immediate medical attention. 
                   Please contact emergency services or visit the nearest hospital immediately.
                 </AlertDescription>
               </Alert>
@@ -245,8 +249,7 @@ export default function SymptomInput() {
       <Alert>
         <AlertTriangle className="h-4 w-4" />
         <AlertDescription>
-          <strong>Important:</strong> This AI analysis provides preliminary guidance only and should not replace professional medical care. 
-          Always consult with qualified healthcare providers for medical decisions, especially for serious or persistent symptoms.
+          <strong>{t.medicalDisclaimer}</strong> {t.medicalDisclaimerText}
         </AlertDescription>
       </Alert>
     </div>

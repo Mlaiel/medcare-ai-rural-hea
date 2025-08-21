@@ -23,6 +23,7 @@ import {
   TrendingUp,
   User
 } from '@phosphor-icons/react'
+import { useLanguage } from '@/hooks/useLanguage'
 
 interface Diagnosis {
   id: string
@@ -51,6 +52,7 @@ interface LabResult {
 export default function DiagnosisHistory() {
   const [diagnoses] = useKV<Diagnosis[]>('medical-diagnoses', [])
   const [labResults] = useKV<LabResult[]>('lab-results', [])
+  const { t } = useLanguage()
 
   const allRecords = [
     ...diagnoses.map(d => ({ ...d, type: 'diagnosis' as const })),
@@ -98,11 +100,11 @@ export default function DiagnosisHistory() {
           <div className="flex justify-center gap-3">
             <Button variant="default">
               <Stethoscope className="h-4 w-4 mr-2" />
-              Describe Symptoms
+              {t.describeSymptoms}
             </Button>
             <Button variant="outline">
               <Upload className="h-4 w-4 mr-2" />
-              Upload Lab Results
+              {t.uploadLabResults}
             </Button>
           </div>
         </CardContent>

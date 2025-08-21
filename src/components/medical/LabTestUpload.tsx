@@ -16,6 +16,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Progress } from '@/components/ui/progress'
 import { Upload, FileImage, Loader2, CheckCircle, AlertTriangle, Eye } from '@phosphor-icons/react'
 import { toast } from 'sonner'
+import { useLanguage } from '@/hooks/useLanguage'
 
 interface LabResult {
   id: string
@@ -35,6 +36,7 @@ export default function LabTestUpload() {
   const [uploadProgress, setUploadProgress] = useState(0)
   const [currentResult, setCurrentResult] = useState<LabResult | null>(null)
   const [labResults, setLabResults] = useKV<LabResult[]>('lab-results', [])
+  const { t, currentLanguage } = useLanguage()
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,19 +67,22 @@ export default function LabTestUpload() {
           const prompt = spark.llmPrompt`
             You are a medical AI assistant analyzing lab test results or medical images for underserved rural communities.
             
+            IMPORTANT: Respond in ${currentLanguage} language, using simple, clear language appropriate for rural communities.
+            
             The user has uploaded a medical document/image: ${file.name}
             File type: ${file.type}
             
             Since I cannot directly process the file content, provide a structured template response for lab result interpretation that would be helpful for rural healthcare:
 
             Provide a JSON response with:
-            - interpretation: General guidance on understanding lab results (2-3 sentences)
-            - findings: Array of 3-4 common things to look for in lab results
+            - interpretation: General guidance on understanding lab results (2-3 sentences) in ${currentLanguage}
+            - findings: Array of 3-4 common things to look for in lab results in ${currentLanguage}
             - urgency: "normal", "attention", or "urgent" 
             - confidence: Number 1-100 (use 75 for this template)
-            - recommendations: Array of 3 next steps for lab result follow-up
+            - recommendations: Array of 3 next steps for lab result follow-up in ${currentLanguage}
 
             Focus on educational content about reading lab results and when to seek medical attention.
+            Consider cultural context and local healthcare availability.
           `
 
           setUploadProgress(75)
@@ -100,7 +105,7 @@ export default function LabTestUpload() {
           setLabResults(currentResults => [newResult, ...currentResults])
           setUploadProgress(100)
           
-          toast.success('Lab result analyzed! Review the interpretation below.')
+          toast.success(t.success + '! Review the interpretation below.')
           
         } catch (error) {
           toast.error('Failed to analyze the lab result. Please try again.')
@@ -142,16 +147,15 @@ export default function LabTestUpload() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Upload className="h-5 w-5 text-accent" />
-            Upload Lab Results or Medical Images
+            {t.uploadTestResults}
           </CardTitle>
           <CardDescription>
-            Upload your lab test results, X-rays, or other medical images for AI interpretation. 
-            Our AI will provide preliminary analysis that can be reviewed by volunteer doctors.
+            {t.uploadLabResultsDesc}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label>Supported Files</Label>
+            <Label>{t.supportedFormats}</Label>
             <p className="text-sm text-muted-foreground">
               Images (JPG, PNG, GIF) or PDF documents up to 10MB
             </p>
@@ -165,7 +169,7 @@ export default function LabTestUpload() {
             <FileImage className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
             <div className="space-y-2">
               <p className="text-lg font-medium text-foreground">
-                Drop files here or click to browse
+                {t.dragDropFiles}
               </p>
               <p className="text-sm text-muted-foreground">
                 Select your lab results, X-rays, or medical images
