@@ -9,7 +9,6 @@
  */
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { useLanguage } from '@/hooks/useLanguage'
 import { useKV } from '@github/spark/hooks'
 
 interface AccessibilitySettings {
@@ -41,7 +40,7 @@ const AccessibilityContext = createContext<AccessibilityContextType | undefined>
 
 export function AccessibilityProvider({ children }: { children: ReactNode }) {
   const [settings, setSettings] = useKV('accessibility-settings', defaultSettings)
-  const { currentLanguage } = useLanguage()
+  const [currentLanguage, setCurrentLanguage] = useState('en')
 
   const updateSettings = (updates: Partial<AccessibilitySettings>) => {
     setSettings(prev => ({ ...prev, ...updates }))
@@ -107,6 +106,40 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
       speakText(message)
     }
   }
+
+  // Get current language from localStorage or document lang for speech synthesis
+  useEffect(() => {
+    const updateLanguage = () => {
+      const storedLang = localStorage.getItem('spark.kv.user-language')
+      if (storedLang) {
+        try {
+          setCurrentLanguage(JSON.parse(storedLang))
+        } catch {
+          setCurrentLanguage(document.documentElement.lang || 'en')
+        }
+      } else {
+        setCurrentLanguage(document.documentElement.lang || 'en')
+      }
+    }
+    
+    updateLanguage()
+    
+    // Listen for language changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'lang') {
+          updateLanguage()
+        }
+      })
+    })
+    
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['lang']
+    })
+    
+    return () => observer.disconnect()
+  }, [])
 
   // Apply accessibility settings to document
   useEffect(() => {

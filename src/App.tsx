@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Toaster } from '@/components/ui/sonner'
 import { Heart, Stethoscope, Upload, Users, AlertTriangle } from '@phosphor-icons/react'
 import { LanguageProvider, useLanguage } from '@/hooks/useLanguage'
 import { AccessibilityProvider } from '@/hooks/useAccessibility'
@@ -177,17 +178,19 @@ function AppContent() {
           </div>
         </div>
       </footer>
+      
+      <Toaster />
     </div>
   )
 }
 
 function App() {
   return (
-    <AccessibilityProvider>
-      <LanguageProvider>
+    <LanguageProvider>
+      <AccessibilityProvider>
         <AppContent />
-      </LanguageProvider>
-    </AccessibilityProvider>
+      </AccessibilityProvider>
+    </LanguageProvider>
   )
 }
 

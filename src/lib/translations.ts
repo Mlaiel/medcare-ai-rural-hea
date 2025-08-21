@@ -461,6 +461,132 @@ export const translations: Record<string, Translations> = {
     alwaysFree: "हमेशा निःशुल्क",
     openSource: "ओपन सोर्स",
     humanitarianLicense: "मानवीय लाइसेंस"
+  },
+
+  pt: {
+    appTitle: "MedCare-AI",
+    appSubtitle: "Plataforma Humanitária de Saúde",
+    doctorPortal: "Portal do Médico",
+    freeOpenSource: "Gratuito e Código Aberto",
+    
+    medicalDisclaimer: "Aviso Médico:",
+    medicalDisclaimerText: "Esta ferramenta de IA fornece orientação preliminar apenas e NÃO é substituto para cuidados médicos profissionais. Sempre consulte profissionais de saúde qualificados para decisões médicas. Em emergências, contate serviços de emergência locais imediatamente.",
+    understood: "Entendido",
+    
+    welcomeTitle: "Bem-vindo ao MedCare-AI",
+    welcomeDescription: "Obtenha orientação médica preliminar, carregue resultados de laboratório para análise e conecte-se com médicos voluntários em todo o mundo. Nossa plataforma alimentada por IA serve comunidades carentes com suporte de saúde compassivo.",
+    
+    describeSymptoms: "Descrever Sintomas",
+    describeSymptomsDesc: "Conte-nos como se sente e obtenha orientação diagnóstica preliminar",
+    uploadLabResults: "Carregar Resultados de Lab",
+    uploadLabResultsDesc: "Tenha seus resultados de teste interpretados por IA e revisados por médicos",
+    previousConsultations: "Consultas Anteriores",
+    previousConsultationsDesc: "Revise seu histórico médico e consultas de IA anteriores",
+    
+    symptoms: "Sintomas",
+    labTests: "Exames de Lab",
+    history: "Histórico",
+    
+    howAreYouFeeling: "Como você está se sentindo hoje?",
+    describeYourSymptoms: "Descreva seus sintomas em detalhes",
+    symptomPlaceholder: "Conte-me sobre seus sintomas, dor, desconforto ou preocupações de saúde...",
+    useVoiceInput: "Usar Entrada de Voz",
+    analyzeSymptoms: "Analisar Sintomas",
+    analyzing: "Analisando seus sintomas...",
+    
+    selectLanguage: "Selecionar Idioma",
+    changeLanguage: "Mudar Idioma",
+    currentLanguage: "Idioma Atual",
+    
+    uploadTestResults: "Carregar Resultados de Teste",
+    dragDropFiles: "Arraste e solte arquivos aqui, ou clique para selecionar",
+    supportedFormats: "Formatos suportados: PDF, JPG, PNG",
+    
+    submit: "Enviar",
+    cancel: "Cancelar",
+    save: "Salvar",
+    loading: "Carregando...",
+    error: "Erro",
+    success: "Sucesso",
+    
+    diagnosis: "Diagnóstico",
+    treatment: "Tratamento",
+    medication: "Medicação",
+    consultation: "Consulta",
+    emergency: "Emergência",
+    
+    voiceInput: "Entrada de Voz",
+    textInput: "Entrada de Texto",
+    speakText: "Falar Texto",
+    
+    createdBy: "Criado com propósito humanitário por",
+    attributionNotice: "MedCare-AI é software gratuito e de código aberto projetado para apoiar comunidades carentes. Atribuição a Fahed Mlaiel (mlaiel@live.de) é obrigatória em todas as cópias, forks e derivados.",
+    alwaysFree: "Sempre Gratuito",
+    openSource: "Código Aberto",
+    humanitarianLicense: "Licença Humanitária"
+  },
+
+  ur: {
+    appTitle: "میڈکیئر-AI",
+    appSubtitle: "انسانی صحت کی خدمات کا پلیٹ فارم",
+    doctorPortal: "ڈاکٹر پورٹل",
+    freeOpenSource: "مفت اور اوپن سورس",
+    
+    medicalDisclaimer: "طبی دستبرداری:",
+    medicalDisclaimerText: "یہ AI ٹول صرف ابتدائی رہنمائی فراہم کرتا ہے اور پیشہ ورانہ طبی دیکھ بھال کا متبادل نہیں ہے۔ طبی فیصلوں کے لیے ہمیشہ اہل صحت کی دیکھ بھال فراہم کنندگان سے مشورہ کریں۔ ہنگامی حالات میں، فوری طور پر مقامی ہنگامی خدمات سے رابطہ کریں۔",
+    understood: "سمجھ گیا",
+    
+    welcomeTitle: "میڈکیئر-AI میں خوش آمدید",
+    welcomeDescription: "ابتدائی طبی رہنمائی حاصل کریں، تجزیے کے لیے لیب کے نتائج اپ لوڈ کریں، اور دنیا بھر کے رضاکار ڈاکٹروں سے جڑیں۔ ہمارا AI سے چلنے والا پلیٹ فارم کمزور کمیونٹیز کو ہمدردانہ صحت کی مدد فراہم کرتا ہے۔",
+    
+    describeSymptoms: "علامات بیان کریں",
+    describeSymptomsDesc: "ہمیں بتائیں کہ آپ کیسا محسوس کر رہے ہیں اور ابتدائی تشخیصی رہنمائی حاصل کریں",
+    uploadLabResults: "لیب کے نتائج اپ لوڈ کریں",
+    uploadLabResultsDesc: "اپنے ٹیسٹ کے نتائج کو AI سے تفسیر کروائیں اور ڈاکٹروں سے جانچوائیں",
+    previousConsultations: "پچھلے مشاورے",
+    previousConsultationsDesc: "اپنی طبی تاریخ اور پچھلے AI مشاوروں کا جائزہ لیں",
+    
+    symptoms: "علامات",
+    labTests: "لیب ٹیسٹس",
+    history: "تاریخ",
+    
+    howAreYouFeeling: "آج آپ کیسا محسوس کر رہے ہیں؟",
+    describeYourSymptoms: "اپنی علامات کی تفصیل سے وضاحت کریں",
+    symptomPlaceholder: "مجھے اپنی علامات، درد، تکلیف، یا کسی بھی صحت کی پریشانی کے بارے میں بتائیں...",
+    useVoiceInput: "آواز کا استعمال کریں",
+    analyzeSymptoms: "علامات کا تجزیہ کریں",
+    analyzing: "آپ کی علامات کا تجزیہ ہو رہا ہے...",
+    
+    selectLanguage: "زبان منتخب کریں",
+    changeLanguage: "زبان تبدیل کریں",
+    currentLanguage: "موجودہ زبان",
+    
+    uploadTestResults: "ٹیسٹ کے نتائج اپ لوڈ کریں",
+    dragDropFiles: "فائلیں یہاں گھسیٹیں اور چھوڑیں، یا منتخب کرنے کے لیے کلک کریں",
+    supportedFormats: "معاون فارمیٹس: PDF, JPG, PNG",
+    
+    submit: "جمع کریں",
+    cancel: "منسوخ کریں",
+    save: "محفوظ کریں",
+    loading: "لوڈ ہو رہا ہے...",
+    error: "خرابی",
+    success: "کامیابی",
+    
+    diagnosis: "تشخیص",
+    treatment: "علاج",
+    medication: "دوا",
+    consultation: "مشاورہ",
+    emergency: "ہنگامی حالت",
+    
+    voiceInput: "آواز کا اندراج",
+    textInput: "متنی اندراج",
+    speakText: "متن بولیں",
+    
+    createdBy: "انسانی مقصد کے ساتھ تخلیق کردہ",
+    attributionNotice: "میڈکیئر-AI ایک مفت اور اوپن سورس سافٹ ویئر ہے جو کمزور کمیونٹیز کی مدد کے لیے ڈیزائن کیا گیا ہے۔ تمام کاپیاں، فورکس اور ڈیری ویٹیوز میں فہد ملائیل (mlaiel@live.de) کی انتساب لازمی ہے۔",
+    alwaysFree: "ہمیشہ مفت",
+    openSource: "اوپن سورس",
+    humanitarianLicense: "انسانی لائسنس"
   }
 }
 
