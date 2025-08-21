@@ -30,5 +30,6 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "types": ["src/global.d.ts"]
 }

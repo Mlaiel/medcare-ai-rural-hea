@@ -16,9 +16,9 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Heart, Stethoscope, Upload, Users, AlertTriangle } from '@phosphor-icons/react'
-import SymptomInput from '@/components/medical/SymptomInput'
-import LabTestUpload from '@/components/medical/LabTestUpload'
-import DiagnosisHistory from '@/components/medical/DiagnosisHistory'
+import SymptomInput from './components/medical/SymptomInput'
+import LabTestUpload from './components/medical/LabTestUpload'
+import DiagnosisHistory from './components/medical/DiagnosisHistory'
 
 function App() {
   const [currentUser, setCurrentUser] = useKV('current-user', null)
