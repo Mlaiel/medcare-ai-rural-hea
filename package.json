@@ -9,7 +9,9 @@
         "build": "tsc -b --noCheck && vite build",
         "lint": "eslint .",
         "optimize": "vite optimize",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d dist"
     },
     "dependencies": {
         "@github/spark": "^0.39.0",
@@ -84,6 +86,7 @@
         "eslint": "^9.28.0",
         "eslint-plugin-react-hooks": "^5.2.0",
         "eslint-plugin-react-refresh": "^0.4.19",
+        "gh-pages": "^6.3.0",
         "globals": "^16.0.0",
         "tailwindcss": "^4.1.11",
         "typescript": "~5.7.2",
