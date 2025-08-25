@@ -15,7 +15,7 @@ import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Progress } from '@/components/ui/progress'
-import { Microphone, Send, Loader2, CheckCircle, AlertTriangle } from '@phosphor-icons/react'
+import { Microphone, PaperPlaneTilt, CircleNotch, CheckCircle, Warning } from '@phosphor-icons/react'
 import { toast } from 'sonner'
 import { useLanguage } from '@/hooks/useLanguage'
 
@@ -80,7 +80,7 @@ export default function SymptomInput() {
       }
 
       setCurrentDiagnosis(newDiagnosis)
-      setDiagnoses(currentDiagnoses => [newDiagnosis, ...currentDiagnoses])
+      setDiagnoses(currentDiagnoses => [newDiagnosis, ...(currentDiagnoses || [])])
       
       toast.success(t.success + '! Review your preliminary assessment below.')
       
@@ -103,65 +103,72 @@ export default function SymptomInput() {
 
   const getSeverityIcon = (severity: string) => {
     if (severity === 'urgent' || severity === 'high') {
-      return <AlertTriangle className="h-4 w-4" />
+      return <Warning className="h-4 w-4" />
     }
     return <CheckCircle className="h-4 w-4" />
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Symptom Input Form */}
       <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Microphone className="h-5 w-5 text-primary" />
-            {t.howAreYouFeeling}
+        <CardHeader className="p-4 sm:p-6">
+          <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+            <Microphone className="h-5 w-5 text-primary flex-shrink-0" />
+            <span className="leading-tight">{t.howAreYouFeeling}</span>
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-sm sm:text-base">
             {t.describeYourSymptoms}
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 p-4 sm:p-6 pt-0">
           <div className="space-y-2">
-            <Label htmlFor="symptoms">{t.symptoms}</Label>
+            <Label htmlFor="symptoms" className="text-sm font-medium">{t.symptoms}</Label>
             <Textarea
               id="symptoms"
               placeholder={t.symptomPlaceholder}
-              className="min-h-32 resize-y"
+              className="min-h-24 sm:min-h-32 resize-y text-sm sm:text-base focus:ring-2 focus:ring-primary/20"
               value={symptoms}
               onChange={(e) => setSymptoms(e.target.value)}
               disabled={isAnalyzing}
             />
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <Button 
               onClick={handleSymptomAnalysis}
               disabled={isAnalyzing || !symptoms.trim()}
-              className="flex-1"
+              className="flex-1 h-11 text-sm sm:text-base font-medium"
+              size="lg"
             >
               {isAnalyzing ? (
                 <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  {t.analyzing}
+                  <CircleNotch className="h-4 w-4 mr-2 animate-spin" />
+                  <span>{t.analyzing}</span>
                 </>
               ) : (
                 <>
-                  <Send className="h-4 w-4 mr-2" />
-                  {t.analyzeSymptoms}
+                  <PaperPlaneTilt className="h-4 w-4 mr-2" />
+                  <span>{t.analyzeSymptoms}</span>
                 </>
               )}
             </Button>
             
-            <Button variant="outline" disabled>
+            <Button 
+              variant="outline" 
+              disabled 
+              className="h-11 sm:flex-shrink-0 text-sm sm:text-base"
+              size="lg"
+            >
               <Microphone className="h-4 w-4 mr-2" />
-              {t.useVoiceInput}
+              <span className="hidden sm:inline">{t.useVoiceInput}</span>
+              <span className="sm:hidden">Voice</span>
               <Badge variant="secondary" className="ml-2 text-xs">Soon</Badge>
             </Button>
           </div>
 
           {isAnalyzing && (
-            <div className="space-y-2">
+            <div className="space-y-2 p-4 bg-muted/30 rounded-lg">
               <div className="flex items-center justify-between text-sm">
                 <span>{t.analyzing}</span>
                 <span>{t.loading}</span>
@@ -174,33 +181,33 @@ export default function SymptomInput() {
 
       {/* AI Analysis Results */}
       {currentDiagnosis && (
-        <Card className="border-primary/20">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-500" />
-                Preliminary AI Assessment
+        <Card className="border-primary/20 shadow-lg">
+          <CardHeader className="p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+                <span>Preliminary AI Assessment</span>
               </CardTitle>
-              <div className="flex items-center gap-2">
-                <Badge className={getSeverityColor(currentDiagnosis.severity)}>
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge className={`${getSeverityColor(currentDiagnosis.severity)} text-xs sm:text-sm`}>
                   {getSeverityIcon(currentDiagnosis.severity)}
-                  {currentDiagnosis.severity.toUpperCase()}
+                  <span className="ml-1">{currentDiagnosis.severity.toUpperCase()}</span>
                 </Badge>
-                <Badge variant="outline">
+                <Badge variant="outline" className="text-xs sm:text-sm">
                   {currentDiagnosis.confidence}% Confidence
                 </Badge>
               </div>
             </div>
-            <CardDescription>
+            <CardDescription className="text-sm sm:text-base">
               Generated on {currentDiagnosis.timestamp.toLocaleDateString()} at {currentDiagnosis.timestamp.toLocaleTimeString()}
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-4 sm:space-y-6 p-4 sm:p-6 pt-0">
             {/* Critical Warning for Urgent Cases */}
             {currentDiagnosis.severity === 'urgent' && (
               <Alert className="border-destructive bg-destructive/5">
-                <AlertTriangle className="h-4 w-4 text-destructive" />
-                <AlertDescription className="font-medium text-destructive">
+                <Warning className="h-4 w-4 text-destructive flex-shrink-0" />
+                <AlertDescription className="font-medium text-destructive text-sm sm:text-base">
                   <strong>{t.emergency}:</strong> Your symptoms may require immediate medical attention. 
                   Please contact emergency services or visit the nearest hospital immediately.
                 </AlertDescription>
@@ -209,8 +216,8 @@ export default function SymptomInput() {
 
             {/* AI Analysis */}
             <div className="space-y-3">
-              <h4 className="font-semibold text-foreground">AI Analysis</h4>
-              <p className="text-muted-foreground leading-relaxed">
+              <h4 className="font-semibold text-foreground text-base sm:text-lg">AI Analysis</h4>
+              <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
                 {currentDiagnosis.analysis}
               </p>
             </div>
@@ -247,7 +254,7 @@ export default function SymptomInput() {
 
       {/* Medical Disclaimer */}
       <Alert>
-        <AlertTriangle className="h-4 w-4" />
+        <Warning className="h-4 w-4" />
         <AlertDescription>
           <strong>{t.medicalDisclaimer}</strong> {t.medicalDisclaimerText}
         </AlertDescription>
